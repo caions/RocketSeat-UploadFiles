@@ -13,9 +13,9 @@ const storageTypes = {
             crypto.randomBytes(5, (erro, hash) => { //quantidade de bytes de caracteres antes do nome
                 if (erro) cb(erro)
 
-                const filename = `${hash.toString('hex')}-${file.originalname}`;
+                file.key = `${hash.toString("hex")}-${file.originalname}`;
                 
-                cb(null, filename)
+                cb(null, file.key)
             })
         }
     }),
@@ -36,7 +36,7 @@ const storageTypes = {
 
 module.exports = {
     dest: path.resolve(__dirname, '..', '..', 'tmp', 'uploads'),
-    storage: storageTypes['local'],
+    storage: storageTypes[process.env.STORAGE_TYPE],
     limits: {
         fileSize: 2 * 1024 * 1024
     },
