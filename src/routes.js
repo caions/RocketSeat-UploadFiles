@@ -9,7 +9,7 @@ routes.post('/posts', multer(multerConfig).single('file'), async(req, res) => {
         name: req.file.originalname,
         size: req.file.size,
         key: req.file.filename,
-        url: ''
+        url: req.file.location || '' 
     })
 
     return res.json(upload)
